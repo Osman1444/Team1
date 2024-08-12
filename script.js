@@ -39,7 +39,6 @@ function loadContent(sectionId) {
                 <form id="chat-form">
                     <div class="input-group">
                         <input type="text" id="chat-input" placeholder="Type here" required>
-                        <button type="submit" id="send-button">Send</button>
                     </div>
                 </form>
             `;
