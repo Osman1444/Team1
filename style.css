@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-image: linear-gradient(#270636, #000000);
+    background-size: 100% 20000%;
+    padding: 0;
+    font-family: "MuseoModerno", sans-serif;
+    color: #fff;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5%;
+}
+
+nav .links {
+    display: flex;
+    justify-content: space-around;
+    width: 30rem;
+}
+
+nav .links a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.5s;
+}
+
+nav .links a:hover {
+    color: #aaa;
+}
+
+main {
+    width: 80%;
+    height: 75vh;
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    padding: 1.5rem;
+    border-radius: 45px;
+    background-color: #65536e55;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+main h1 {
+    font-size: 3rem;
+}
+
+main .timer {
+    border-radius: 100rem;
+    padding: 1.5rem;
+    width: 15rem;
+    height: 15rem;
+    outline: none;
+    font-size: 5rem;
+    background-color: #66666666;
+    color: #fff;
+    border: 0;
+}
+
+main .timer-buttons button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: #5e5e5e66;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+main .timer-buttons button:hover {
+    background-color: #5e5e5ebb;
+}
+
+#chat-box {
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Stack messages vertically */
+    gap: 10px; /* Space between messages */
+}
+
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    display: inline-block;
+    word-wrap: break-word; /* Ensure text wraps properly */
+    opacity: 0;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.message.user {
+    background-color: #55555555;
+    color: white;
+    align-self: flex-end; /* Align to the right */
+}
+
+.message.ai {
+    background-color: #aaaaaaaa;
+    color: black;
+    align-self: flex-start; /* Align to the left */
+}
+.message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.input-group input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 0;
+    background-color: #66666666;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    transition: 0.5s;
+    width: 7rem;
+    color: #fff;
+    outline: none;
+}
+.input-group input[type="text"]:focus, .input-group input[type="text"]:hover {
+    width: 50rem;
+    padding: 15px 10px;
+}
