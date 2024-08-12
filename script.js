@@ -190,3 +190,4 @@ function appendMessage(message, sender) {
 
 // Initialize by showing the welcome page
 showSection('timer');
+x
