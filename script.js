@@ -28,6 +28,7 @@ function loadContent(sectionId) {
             break;
         case 'calendar':
             content = `
+            <h1>Calendar</h1>
                 <div class="calendar">
         <div class="calendar-header">
             <h2>August 2024</h2>
