@@ -145,7 +145,7 @@ main .timer-buttons button:hover {
     padding: 15px 10px;
 }
 .calendar {
-    width: 300px;
+    width: 330px;
     background-color: #77777777;
     border-radius: 10px;
     overflow: hidden;
