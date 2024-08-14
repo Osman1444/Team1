@@ -19,20 +19,8 @@
     
     <main id="home-content">
         <h1>Welcome</h1>
-        <div class="chat" id="chat-box"></div>
-        <div class="suggestions" id="suggestions">
-            <ul>
-                <li><button type="button" class="suggestion-button">How can I improve my time management skills?</button></li>
-                <li><button type="button" class="suggestion-button">What are some effective time management techniques?</button></li>
-                <li><button type="button" class="suggestion-button">Can you suggest a daily schedule to optimize productivity?</button></li>
-                <li><button type="button" class="suggestion-button">How do I prioritize tasks effectively?</button></li>
-            </ul>
-        </div>
-        <form id="chat-form">
-            <div class="input-group">
-                <input type="text" id="chat-input" placeholder="Type your message here" required>
-            </div>
-        </form>
+        <div id="chatling-inline-bot" style="width: 80%; height: 500px;"></div>
+        <script async data-id="3852745197" data-display="page_inline" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
     </main>
     
     <main id="timer-content">
@@ -134,9 +122,9 @@
     </main>
 
     <script src="script.js"></script>
+    <script src="ai.js"></script>
     <script src="timer.js"></script>
     <script src="calendar.js"></script>
-    <script src="ai.js"></script>
     <script src="task.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
 </body>
