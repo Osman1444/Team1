@@ -16,12 +16,8 @@ function validateInput() {
     }
 
     if (minput.value > maxMinutes) {
-        errorMessage.textContent = "The maximum allowed time is 999 minutes.";
+        errorMessage.textContent = "The maximum allowed time is " + maxMinutes + " minutes.";
         minput.value = maxMinutes;
-        errorMessage.style.opacity = 1;
-    } else if (minput.value < 0) {
-        errorMessage.textContent = "Please enter a positive number.";
-        minput.value = 0;
         errorMessage.style.opacity = 1;
     } else {
         errorMessage.style.opacity = 0;
@@ -30,10 +26,6 @@ function validateInput() {
     if (sinput.value > maxSeconds) {
         errorMessage.textContent = "The maximum allowed time is 59 seconds.";
         sinput.value = maxSeconds;
-        errorMessage.style.opacity = 1;
-    } else if (sinput.value < 0) {
-        errorMessage.textContent = "Please enter a positive number.";
-        sinput.value = 0;
         errorMessage.style.opacity = 1;
     } else {
         errorMessage.style.opacity = 0;
@@ -74,7 +66,6 @@ function startTimer() {
             sinput.value = `${seconds < 10 ? '0' : ''}${seconds}`;
         }
     }, 1000);
-
 }
 
 function stopTimer() {
