@@ -1,5 +1,6 @@
 let timerInterval;
-let isTimerRunning = false;
+let isTimerRunning = true;
+showSection('home');
 
 function fadeOut(element, callback) {
     element.style.opacity = 0;
@@ -15,84 +16,120 @@ function loadContent(sectionId) {
     let content = '';
 
     switch (sectionId) {
+        case 'home':
+            content = `
+                <h1>Welcome</h1>
+                <div class="chat" id="chat-box"></div>
+                <div class="suggestions" id="suggestions">
+                    <ul>
+                        <li><button type="button" class="suggestion-button">How can I improve my time management skills?</button></li>
+                        <li><button type="button" class="suggestion-button">What are some effective time management techniques?</button></li>
+                        <li><button type="button" class="suggestion-button">Can you suggest a daily schedule to optimize productivity?</button></li>
+                        <li><button type="button" class="suggestion-button">How do I prioritize tasks effectively?</button></li>
+                        <li><button type="button" class="suggestion-button">What tools or apps can help with time management?</button></li>
+                    </ul>
+                </div>
+                <form id="chat-form">
+                    <div class="input-group">
+                        <input type="text" id="chat-input" placeholder="Type your message here" required>
+                    </div>
+                </form>
+            `;
+            break;
         case 'timer':
             content = `
                 <h1>Timer</h1>
-                <input class="timer" type="text" id="work-timer" oninput="validateInput()">
+                <div class="timer">
+                <input class="mtimer" type="text" id="work-mtimer" oninput="validateInput()"><span>:</span>
+                <input class="stimer" type="text" id="work-stimer" oninput="validateInput()">
+                </div>
                 <span id="error-message" style="color: red; opacity: 0; transition: opacity 0.5s ease;"></span>
                 <div class="timer-buttons">
-                    <button id="start-btn" onclick="startTimer()">Start Timer</button>
-                    <button id="stop-btn" onclick="stopTimer()" style="display: none;">Stop Timer</button>
+                    <button id="start-btn" onclick="startTimer()">Start</button>
+                    <button id="stop-btn" onclick="stopTimer()" style="display: none;">Stop</button>
                 </div>
             `;
             break;
         case 'calendar':
             content = `
             <h1>Calendar</h1>
+            <div>
                 <div class="calendar">
-        <div class="calendar-header">
-            <h2>August 2024</h2>
-        </div>
-        <div class="calendar-body">
-            <div class="calendar-weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
+                <div class="calendar-header">
+                    <h2>August 2024</h2>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="calendar-days">
+                        <div class="calendar-day">28</div>
+                        <div class="calendar-day">29</div>
+                        <div class="calendar-day">30</div>
+                        <div class="calendar-day">31</div>
+                        <div class="calendar-day">1</div>
+                        <div class="calendar-day">2</div>
+                        <div class="calendar-day">3</div>
+                        <div class="calendar-day">4</div>
+                        <div class="calendar-day">5</div>
+                        <div class="calendar-day">6</div>
+                        <div class="calendar-day">7</div>
+                        <div class="calendar-day">8</div>
+                        <div class="calendar-day">9</div>
+                        <div class="calendar-day">10</div>
+                        <div class="calendar-day">11</div>
+                        <div class="calendar-day">12</div>
+                        <div class="calendar-day">13</div>
+                        <div class="calendar-day">14</div>
+                        <div class="calendar-day">15</div>
+                        <div class="calendar-day">16</div>
+                        <div class="calendar-day">17</div>
+                        <div class="calendar-day">18</div>
+                        <div class="calendar-day">19</div>
+                        <div class="calendar-day">20</div>
+                        <div class="calendar-day">21</div>
+                        <div class="calendar-day">22</div>
+                        <div class="calendar-day">23</div>
+                        <div class="calendar-day">24</div>
+                        <div class="calendar-day">25</div>
+                        <div class="calendar-day">26</div>
+                        <div class="calendar-day">27</div>
+                        <div class="calendar-day">28</div>
+                        <div class="calendar-day">29</div>
+                        <div class="calendar-day">30</div>
+                        <div class="calendar-day today">31</div>
+                    </div>
+                </div>
             </div>
-            <div class="calendar-days">
-                <div class="calendar-day">28</div>
-                <div class="calendar-day">29</div>
-                <div class="calendar-day">30</div>
-                <div class="calendar-day">31</div>
-                <div class="calendar-day">1</div>
-                <div class="calendar-day">2</div>
-                <div class="calendar-day">3</div>
-                <div class="calendar-day">4</div>
-                <div class="calendar-day">5</div>
-                <div class="calendar-day">6</div>
-                <div class="calendar-day">7</div>
-                <div class="calendar-day">8</div>
-                <div class="calendar-day">9</div>
-                <div class="calendar-day">10</div>
-                <div class="calendar-day">11</div>
-                <div class="calendar-day">12</div>
-                <div class="calendar-day">13</div>
-                <div class="calendar-day">14</div>
-                <div class="calendar-day">15</div>
-                <div class="calendar-day">16</div>
-                <div class="calendar-day">17</div>
-                <div class="calendar-day">18</div>
-                <div class="calendar-day">19</div>
-                <div class="calendar-day">20</div>
-                <div class="calendar-day">21</div>
-                <div class="calendar-day">22</div>
-                <div class="calendar-day">23</div>
-                <div class="calendar-day">24</div>
-                <div class="calendar-day">25</div>
-                <div class="calendar-day">26</div>
-                <div class="calendar-day">27</div>
-                <div class="calendar-day">28</div>
-                <div class="calendar-day">29</div>
-                <div class="calendar-day">30</div>
-                <div class="calendar-day today">31</div>
+            <div class="dates">
             </div>
         </div>
-    </div>
             `;
             break;
-        case 'ai':
+        case 'task':
             content = `
-                <h1>AI Assessment</h1>
-                <div class="chat" id="chat-box"></div>
-                <form id="chat-form">
-                    <div class="input-group">
-                        <input type="text" id="chat-input" placeholder="Type here" required>
-                    </div>
-                </form>
+            <h1>Task Manager</h1>
+            <div class="tasksection">
+                <div class="tasklist">
+                <button id="add-task-btn" onclick="addTaskPrompt()">+</button>
+                <ul id="task-list">
+                    <!-- Tasks will be added here dynamically -->
+                </ul>
+                </div>
+                <div id="pomodoro-timer">
+                    <h2>Pomodoro Timer</h2>
+                    <input type="text" id="task-name" placeholder="Task name" readonly>
+                    <div id="timer-display">25:00</div>
+                    <button id="start-timer-btn" onclick="startPomodoro()">Start Timer</button>
+                    <button id="stop-timer-btn" onclick="stopPomodoro()" style="display: none;">Stop Timer</button>
+                </div>
+            </div>
             `;
             break;
     }
@@ -104,7 +141,7 @@ function loadContent(sectionId) {
     fadeIn(main);
 
     // Initialize chat form handler if AI Assessment section is loaded
-    if (sectionId === 'ai') {
+    if (sectionId === 'home') {
         document.getElementById('chat-form').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent page refresh
 
@@ -133,113 +170,3 @@ function showSection(sectionId) {
         loadContent(sectionId);
     });
 }
-
-function validateInput() {
-    const input = document.getElementById('work-timer');
-    const errorMessage = document.getElementById('error-message');
-    const maxMinutes = 999;
-
-    // Remove non-digit characters
-    input.value = input.value.replace(/[^0-9]/g, '');
-
-    if (input.value > maxMinutes) {
-        errorMessage.textContent = "The maximum allowed time is 999 minutes.";
-        input.value = maxMinutes;
-        errorMessage.style.opacity = 1;
-    } else if (input.value < 0) {
-        errorMessage.textContent = "Please enter a positive number.";
-        input.value = 0;
-        errorMessage.style.opacity = 1;
-    } else {
-        errorMessage.style.opacity = 0;
-    }
-}
-
-function startTimer() {
-    const input = document.getElementById('work-timer');
-    let time = parseInt(input.value) * 60; // Convert minutes to seconds
-
-    clearInterval(timerInterval);
-
-    timerInterval = setInterval(() => {
-        if (time <= 0) {
-            clearInterval(timerInterval);
-            alert("Time's up!");
-            input.value = '';
-            toggleButtons();
-        } else {
-            time--;
-            const minutes = Math.floor(time / 60);
-            const seconds = time % 60;
-            input.value = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-    }, 1000);
-
-    toggleButtons();
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-    const input = document.getElementById('work-timer');
-    input.value = ''; // Clear the input value
-    toggleButtons();
-}
-
-function toggleButtons() {
-    const startBtn = document.getElementById('start-btn');
-    const stopBtn = document.getElementById('stop-btn');
-
-    if (isTimerRunning) {
-        startBtn.classList.add('hide');
-        stopBtn.classList.remove('hide');
-    } else {
-        startBtn.classList.remove('hide');
-        stopBtn.classList.add('hide');
-    }
-    isTimerRunning = !isTimerRunning;
-}
-
-function sendToAPI(userMessage) {
-    fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_API_KEY'
-        },
-        body: JSON.stringify({
-            prompt: userMessage,
-            max_tokens: 150,
-            n: 1,
-            stop: null,
-            temperature: 0.6
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const aiMessage = data.choices[0].text.trim();
-        appendMessage(aiMessage, 'ai');
-    })
-    .catch(error => {
-        appendMessage('Sorry, there was an error connecting to the AI service.', 'error');
-    });
-}
-
-function appendMessage(message, sender) {
-    const chatBox = document.getElementById('chat-box');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', sender);
-    messageElement.textContent = message;
-
-    // Append and show message
-    chatBox.appendChild(messageElement);
-    setTimeout(() => {
-        messageElement.classList.add('show');
-    }, 10);
-
-    // Scroll to the bottom
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Initialize by showing the welcome page
-showSection('timer');
-x

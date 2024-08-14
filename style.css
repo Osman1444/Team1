@@ -1,12 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
+    background-color: #000;
     background-image: linear-gradient(#270636, #000000);
-    background-size: 100% 20000%;
+    background-image: url('Source/Background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 0;
     font-family: "MuseoModerno", sans-serif;
     color: #fff;
+    animation: moveBackground 30s ease infinite;
 }
+
+@keyframes moveBackground {
+    0%  {background-position: 0 0%;}
+    15% {background-position: 0 2.5%;}
+    30% {background-position: 0 0%;}
+    45% {background-position: 0 -3%;}
+    60% {background-position: 0 0%;}
+    75% {background-position: 0 2%;}
+    100%{background-position: 0 0%;}
+}
+
+
+@keyframes shake {
+    15% { transform: scale(1); }
+    35% { transform: scale(0.95); }
+    50% { transform: scale(1); }
+    65% { transform: scale(0.95); }
+    80% { transform: scale(1); }
+}
+
+.shake {
+    animation: shake 0.75s ease-in-out infinite;
+}
+
 
 nav {
     position: absolute;
@@ -35,6 +63,9 @@ nav .links a {
 nav .links a:hover {
     color: #aaa;
 }
+nav .links a:active {
+    color: #28282866;
+}
 
 main {
     width: 80%;
@@ -50,6 +81,7 @@ main {
     align-items: center;
     opacity: 1;
     transition: opacity 0.5s;
+    backdrop-filter: blur(7.5px);
 }
 
 main h1 {
@@ -61,11 +93,21 @@ main .timer {
     padding: 1.5rem;
     width: 15rem;
     height: 15rem;
-    outline: none;
-    font-size: 6rem;
     background-color: #66666666;
-    color: #fff;
+    font-size: 7rem;
     border: 0;
+    display: flex;
+    align-items: center;
+}
+main .timer input{
+    width: 50%;
+    height: 7rem;
+    background-color: #00000015;
+    border: 0;
+    border-radius: 25px;
+    font-size: 6rem;
+    color: #fff;
+    outline: none;
 }
 
 main .timer-buttons button {
@@ -83,7 +125,12 @@ main .timer-buttons button {
 main .timer-buttons button:hover {
     background-color: #5e5e5ebb;
 }
+main .timer-buttons button:active {
+    transition: 0.2s;
+    background-color: #36363666;
+}
 
+/* _____________________________ */
 #chat-box {
     width: 100%;
     height: 300px;
@@ -133,17 +180,61 @@ main .timer-buttons button:hover {
     padding: 10px;
     border: 0;
     background-color: #66666666;
-    border-radius: 20px;
+    border-radius: 30px;
     font-size: 1.5rem;
     transition: 0.5s;
     width: 7rem;
     color: #fff;
     outline: none;
+    max-width: 80vw;
 }
 .input-group input[type="text"]:focus, .input-group input[type="text"]:hover {
     width: 50rem;
     padding: 15px 10px;
+    border-radius: 20px;
 }
+.suggestions {
+    margin-top: 1rem;
+    text-align: center;
+    width: 75%;
+}
+
+.suggestions ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.suggestions li {
+    margin: 0.15rem;
+    width: 25%;
+}
+
+.suggestion-button {
+    background-color: #4646467a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: left;
+    display: block;
+}
+
+.suggestion-button:hover {
+    background-color: #2222227a;
+}
+.suggestion-button:active {
+    background-color: #28282866;
+}
+
+/* _____________________________ */
 .calendar {
     width: 330px;
     background-color: #77777777;
@@ -194,7 +285,126 @@ main .timer-buttons button:hover {
     color: #fff;
 }
 
-.calendar-day.today {
-    background-color: #bbb;
+
+
+/* _____________________________ */
+.tasksection {
+    width: 80%;
+    max-height: 70%;
+    display: flex;
+    height: 30rem;
+}
+.tasklist {
+    width: 50%;
+    height: 25rem;
+    max-height: 80%;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #65536e55;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#add-task-btn {
+    position: absolute;
+    right: 10px; bottom: 10px;
+    padding: 1rem;
+    border: none;
+    border-radius: 100px;
+    background-color: #4646467a;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    width: 5rem; height: 5rem;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+#task-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #65536e55;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#task-list li:hover {
+    background-color: #8282827a;
+}
+#task-list li:active{
+    background-color:#28282866;
+}
+
+#task-list input[type="checkbox"] {
+    margin-right: 0.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f0f0f0;
+    border: 7px solid #ccc;
+    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Style the checkmark inside the checkbox */
+#task-list input[type="checkbox"]:checked {
+    background-color: #000000;
+}
+
+#pomodoro-timer {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#pomodoro-timer input {
+    padding: 0.5rem;
+    background-color: #00000000;
+    border: 0;
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    cursor: auto;
+    outline: none;
     color: #fff;
+}
+
+#pomodoro-timer button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4646467a;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    transition: background-color 0.3s;
+}
+
+#pomodoro-timer button:hover {
+    background-color: #5e5e5e66;
+}
+#pomodoro-timer button:active {
+    background-color: #28282866;
+}
+
+#timer-display {
+    font-size: 2rem;
+    margin-top: 1rem;
 }
