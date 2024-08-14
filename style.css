@@ -24,17 +24,16 @@ body {
 
 
 @keyframes shake {
-    15% { transform: scale(1); }
-    35% { transform: scale(0.95); }
-    50% { transform: scale(1); }
-    65% { transform: scale(0.95); }
-    80% { transform: scale(1); }
+    15% { transform: scale(1) translateX(0px); }
+    35% { transform: scale(0.95) translateX(10px); }
+    40% { transform: scale(1) translateX(0px); }
+    45% { transform: scale(0.95) translateX(-10px); }
+    50% { transform: scale(1) translateX(0px); }
 }
 
 .shake {
-    animation: shake 0.75s ease-in-out infinite;
+    animation: shake 1.5s ease-in-out infinite;
 }
-
 
 nav {
     position: absolute;
@@ -235,15 +234,21 @@ main .timer-buttons button:active {
 }
 
 /* _____________________________ */
+.calender {
+    width: 80%;
+    max-height: 70%;
+    display: flex;
+    height: 30rem;
+}
 .calendar {
     width: 330px;
-    background-color: #77777777;
+    background-color: #66666666;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .calendar-header {
-    background-color: #aaaaaa99;
+    background-color: #88888888;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -284,8 +289,67 @@ main .timer-buttons button:active {
     background-color: #bbb;
     color: #fff;
 }
+.calendar-day:active {
+    background-color: #888;
+    color: #fff;
+}
 
+.calendar-uday {
+    padding: 10px;
+    margin: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    color: #bbb;
+}
 
+.dates {
+    flex-grow: 1;
+    margin-left: 2rem;
+    position: relative;
+}
+
+.add-date-btn {
+    position: absolute;
+    right: 10px; bottom: 10px;
+    padding: 1rem;
+    border: none;
+    border-radius: 100px;
+    background-color: #4646467a;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    width: 5rem; height: 5rem;
+}
+
+#date-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #65536e55;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#date-list li:hover {
+    background-color: #8282827a;
+}
+#date-list li:active{
+    background-color:#28282866;
+}
+.dayselect{
+    padding: 0.2rem;
+    background-color: #00000000;
+    position: absolute;
+    right: 20px;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+}
+/* .dayselect option{
+    color: #000;
+} */
 
 /* _____________________________ */
 .tasksection {
@@ -346,7 +410,7 @@ main .timer-buttons button:active {
     background-color:#28282866;
 }
 
-#task-list input[type="checkbox"] {
+input[type="checkbox"] {
     margin-right: 0.5rem;
     appearance: none;
     -webkit-appearance: none;
@@ -362,7 +426,7 @@ main .timer-buttons button:active {
 }
 
 /* Style the checkmark inside the checkbox */
-#task-list input[type="checkbox"]:checked {
+input[type="checkbox"]:checked {
     background-color: #000000;
 }
 

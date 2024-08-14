@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav>
-        <h1>Minute manager</h1>
+        <h1>Minute Manager</h1>
         <div class="links">
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('timer')">Timer</a>
@@ -17,13 +17,127 @@
         </div>
     </nav>
     <main id="main-content">
-        
+
     </main>
+    <!-- <main id="home-content">
+        <h1>Welcome</h1>
+        <div class="chat" id="chat-box"></div>
+        <div class="suggestions" id="suggestions">
+            <ul>
+                <li><button type="button" class="suggestion-button">How can I improve my time management skills?</button></li>
+                <li><button type="button" class="suggestion-button">What are some effective time management techniques?</button></li>
+                <li><button type="button" class="suggestion-button">Can you suggest a daily schedule to optimize productivity?</button></li>
+                <li><button type="button" class="suggestion-button">How do I prioritize tasks effectively?</button></li>
+            </ul>
+        </div>
+        <form id="chat-form">
+            <div class="input-group">
+                <input type="text" id="chat-input" placeholder="Type your message here" required>
+            </div>
+        </form>
+    </main>
+
+    <main id="timer-content">
+        <h1>Timer</h1>
+        <div class="timer">
+        <input class="mtimer" type="text" id="work-mtimer" oninput="validateInput()"><span>:</span>
+        <input class="stimer" type="text" id="work-stimer" oninput="validateInput()">
+        </div>
+        <span id="error-message" style="color: red; opacity: 0; transition: opacity 0.5s ease;"></span>
+        <div class="timer-buttons">
+            <button id="start-btn" onclick="startTimer()">Start</button>
+            <button id="stop-btn" onclick="stopTimer()" style="display: none;">Stop</button>
+        </div>
+    </main>
+
+    <main id="calendar-content">
+        <h1>Calendar</h1>
+        <div class="calender">
+            <div class="calendar">
+            <div class="calendar-header">
+                <h2>August 2024</h2>
+            </div>
+            <div class="calendar-body">
+                <div class="calendar-weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="calendar-days">
+                    <div class="calendar-uday">28</div>
+                    <div class="calendar-uday">29</div>
+                    <div class="calendar-uday">30</div>
+                    <div class="calendar-uday">31</div>
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day">22</div>
+                    <div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                    <div class="calendar-day today">31</div>
+                </div>
+            </div>
+        </div>
+        <div class="dates">
+            <button class="add-date-btn" onclick="adddate()">+</button>
+            <ul id="date-list">
+            </ul>
+        </div>
+    </div>
+    </main>
+
+    <main id="task-content">
+        <h1>Task Manager</h1>
+        <div class="tasksection">
+            <div class="tasklist">
+            <button id="add-task-btn" onclick="addTaskPrompt()">+</button>
+            <ul id="task-list">
+            
+            </ul>
+            </div>
+            <div id="pomodoro-timer">
+                <h2>Pomodoro Timer</h2>
+                <input type="text" id="task-name" placeholder="Task name" readonly>
+                <div id="timer-display">25:00</div>
+                <button id="start-timer-btn" onclick="startPomodoro()">Start Timer</button>
+                <button id="stop-timer-btn" onclick="stopPomodoro()" style="display: none;">Stop Timer</button>
+            </div>
+        </div>        
+    </main> -->
 
     <script src="script.js"></script>
     <script src="timer.js"></script>
     <script src="calendar.js"></script>
     <script src="ai.js"></script>
     <script src="task.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>

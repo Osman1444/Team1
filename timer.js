@@ -62,7 +62,7 @@ function startTimer() {
             // alert("Time's up!");
             minput.value = '';
             sinput.value = '';
-            document.body.classList.add('shake');
+            alrt();
             toggleButtons();
         } else {
             minput.style.pointerEvents = 'none';
@@ -103,6 +103,23 @@ function toggleButtons() {
 }
 
 
-document.body.addEventListener('click', function() {
-    document.body.classList.remove('shake');
-});
+function alrt(){
+    document.body.classList.add('shake');
+    playSound();
+    
+    document.body.addEventListener('click', function() {
+        document.body.classList.remove('shake');
+        stopSound();
+    });
+}
+// Function to play the sound
+function playSound() {
+    audio.play().catch(error => {
+        console.error('Error playing sound:', error);
+    });
+}
+function stopSound() {
+    audio.pause().catch(error => {
+        console.error('Error playing sound:', error);
+    });
+}

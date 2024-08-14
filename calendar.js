@@ -1,68 +1,54 @@
-function insertCalendarSection() {
-    const mainContent = document.getElementById('main-content');
+function adddate(taskdate) {
+    let date = '';
+    date = prompt('Add your task or event name');
+    if (taskdate === 0) {
+        taskdate = String(today.getDate());
+    }
 
-    const calendarHTML = `
-        <h1>Calendar</h1>
-        <div class="calendar">
-            <div class="calendar-header">
-                <h2 id="calendar-month-year"></h2>
-            </div>
-            <div class="calendar-body">
-                <div class="calendar-weekdays">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
-                </div>
-                <div class="calendar-days" id="calendar-days">
-                    <!-- Calendar days will be inserted here dynamically -->
-                </div>
-            </div>
-        </div>
+    if (date && taskdate) {
+        addDate(date, taskdate);
+    }
+}
+
+function addDate(taskName, taskdate) {
+    const dateList = document.getElementById('date-list');
+    const li = document.createElement('li');
+    let specificDate = `2024-04-${taskdate}`;
+
+    let selectDay = `
+        <input class="dayselect" type="date" value="${specificDate}">
     `;
 
-    // Insert the calendar HTML into the main content area
-    mainContent.innerHTML = calendarHTML;
+    li.innerHTML = `
+        <input type="checkbox" class="task-checkbox">
+        <span class="task-name">${taskName}</span> ${selectDay}
+    `;
 
-    // Call generateCalendar after the calendar HTML is inserted
-    generateCalendar();
+    dateList.appendChild(li);
+
+    // Call the function to upload the date to Google Calendar
+    addEventToCalendar(taskName, specificDate);
 }
 
-function generateCalendar() {
-    const today = new Date();
-    const currentMonth = today.getMonth(); // 0-based index (0 = January)
-    const currentYear = today.getFullYear();
+function addEventToCalendar(taskName, date) {
+    var event = {
+      'summary': taskName,
+      'start': {
+        'date': date,  // Date in the format YYYY-MM-DD
+        'timeZone': 'America/Los_Angeles'  // Set the appropriate timezone
+      },
+      'end': {
+        'date': date,  // Same end date for all-day events
+        'timeZone': 'America/Los_Angeles'
+      }
+    };
 
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay(); // Day of week for the 1st of the month
-    const lastDateOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Last date of the month
+    var request = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',  // Add to the user's primary calendar
+      'resource': event
+    });
 
-    // Update month and year header
-    document.getElementById('calendar-month-year').textContent = `${today.toLocaleString('default', { month: 'long' })} ${currentYear}`;
-
-    // Generate days
-    let daysHTML = '';
-    for (let i = 0; i < firstDayOfMonth; i++) {
-        daysHTML += '<div class="calendar-day empty"></div>'; // Empty divs for days before the 1st
-    }
-
-    for (let day = 1; day <= lastDateOfMonth; day++) {
-        const isToday = (day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear());
-        daysHTML += `<div class="calendar-day ${isToday ? 'today' : ''}">${day}</div>`;
-    }
-
-    console.log(daysHTML); // Debugging: Check if daysHTML is being generated
-
-    const calendarDaysContainer = document.getElementById('calendar-days');
-    if (calendarDaysContainer) {
-        calendarDaysContainer.innerHTML = daysHTML;
-    } else {
-        console.error('Calendar days container not found!');
-    }
+    request.execute(function(event) {
+      console.log('Event created: ' + event.htmlLink);
+    });
 }
-
-
-// Example call to insert the calendar section when needed
-insertCalendarSection();
