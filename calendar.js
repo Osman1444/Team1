@@ -2,7 +2,7 @@ function adddate(taskdate) {
     let date = '';
     date = prompt('Add your task or event name');
     if (taskdate === 0) {
-        taskdate = String(today.getDate());
+        taskdate = '01';
     }
 
     if (date && taskdate) {
