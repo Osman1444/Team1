@@ -93,6 +93,9 @@ nav .links a:active {
 #task-content {
     transform: scale(0);
 }
+#feedback-content {
+    transform: scale(0);
+}
 
 main {
     width: 80%;
