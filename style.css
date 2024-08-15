@@ -96,6 +96,10 @@ nav .links a:active {
 #feedback-content {
     transform: scale(0);
 }
+#feedback-content a {
+    color: #fff;
+    font-size: 3rem;
+}
 
 main {
     width: 80%;
