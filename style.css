@@ -97,8 +97,8 @@ nav .links a:active {
     transform: scale(0);
 }
 #feedback-content a {
-    color: #fff;
-    font-size: 3rem;
+    color: #aaa;
+    font-size: 1.75rem;
 }
 
 main {
