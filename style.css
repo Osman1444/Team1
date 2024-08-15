@@ -159,108 +159,24 @@ main .timer-buttons button:active {
 }
 
 /* _____________________________ */
-#chat-box {
+  #chatling-inline-bot {
     width: 100%;
-    height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column; /* Stack messages vertically */
-    gap: 10px; /* Space between messages */
-}
+    max-width: 900px; /* Set a max width */
+    height: 600px;    /* Customize the height */
+    margin: 0 auto;
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden;
+  }
 
-.message {
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 80%;
-    display: inline-block;
-    word-wrap: break-word; /* Ensure text wraps properly */
-    opacity: 0;
-    transition: opacity 1.5s ease, transform 1.5s ease;
-}
-
-.message.user {
-    background-color: #55555555;
-    color: white;
-    align-self: flex-end; /* Align to the right */
-}
-
-.message.ai {
-    background-color: #aaaaaaaa;
-    color: black;
-    align-self: flex-start; /* Align to the left */
-}
-.message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+  #chatling-chat-iframe {
+    border-radius: 25px; /* Apply same border-radius to iframe */
+    height: 100%;
     width: 100%;
-}
-
-.input-group input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: 0;
-    background-color: #66666666;
-    border-radius: 30px;
-    font-size: 1.5rem;
-    transition: 0.5s;
-    width: 7rem;
-    color: #fff;
-    outline: none;
-    max-width: 80vw;
-}
-.input-group input[type="text"]:focus, .input-group input[type="text"]:hover {
-    width: 50rem;
-    padding: 15px 10px;
-    border-radius: 20px;
-}
-.suggestions {
-    margin-top: 1rem;
-    text-align: center;
-    width: 75%;
-}
-
-.suggestions ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.suggestions li {
-    margin: 0.15rem;
-    width: 25%;
-}
-
-.suggestion-button {
-    background-color: #4646467a;
-    color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    text-align: left;
+    transform: scale(1); /* Adjust the scale as needed */
     display: block;
-}
+  }
 
-.suggestion-button:hover {
-    background-color: #2222227a;
-}
-.suggestion-button:active {
-    background-color: #28282866;
-}
 
 /* _____________________________ */
 .calender {
@@ -375,6 +291,11 @@ main .timer-buttons button:active {
     border: none;
     color: #fff;
     font-size: 1.5rem;
+}
+#date-list a {
+    text-decoration: none;
+    margin-left: 1rem;
+    color: #999;
 }
 /* .dayselect option{
     color: #000;
