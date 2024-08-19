@@ -11,6 +11,7 @@ function validateInput() {
 
     if (minput.value > 99) {
         minput.style.fontSize = '4rem'
+        sinput.focus();
     } else {
         minput.style.fontSize = '6rem'
     }

@@ -84,15 +84,32 @@ function addTaskPrompt() {
 function addTask(taskName) {
     const taskList = document.getElementById('task-list');
     const li = document.createElement('li');
+    
+    // Create task item with a delete button
     li.innerHTML = `
         <input type="checkbox" class="task-checkbox">
         <span class="task-name">${taskName}</span>
+        <button class="delete-btn">Delete</button>
     `;
+    
+    // Add event listener for delete button
+    li.querySelector('.delete-btn').onclick = function() {
+        deleteTask(li);
+    };
+
     li.onclick = function() {
         selectTask(taskName);
     };
+
     taskList.appendChild(li);
     saveTasksToCookies(); // Save tasks to cookies after adding
+}
+
+// Function to delete a task from the task list
+function deleteTask(taskElement) {
+    const taskList = document.getElementById('task-list');
+    taskList.removeChild(taskElement);
+    saveTasksToCookies(); // Save tasks to cookies after deleting
 }
 
 // Function to select a task from the list

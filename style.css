@@ -81,24 +81,11 @@ nav .links a:active {
     color: #28282866;
 }
 
+main {
+    transform: scale(0);
+}
 #home-content {
     transform: scale(1);
-}
-#timer-content {
-    transform: scale(0);
-}
-#calendar-content {
-    transform: scale(0);
-}
-#task-content {
-    transform: scale(0);
-}
-#feedback-content {
-    transform: scale(0);
-}
-#feedback-content a {
-    color: #aaa;
-    font-size: 1.75rem;
 }
 
 main {
@@ -123,6 +110,73 @@ main h1 {
     font-size: 3rem;
 }
 
+main button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: #5e5e5e66;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+main button:hover {
+    background-color: #5e5e5ebb;
+    transform: scale(1.1);
+}
+main button:active {
+    transition: 0.2s;
+    background-color: #36363666;
+    transform: scale(0.9);
+}
+
+/* _____________________________ */
+main .home {
+    /* background-color: #000; */
+    flex-grow: 1;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+main .home button {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    width: 25%;
+    background-color: #59595966;
+    border: 0;
+    border-radius: 35px;
+    color: #fff;
+    transition: 0.3s ease;
+}
+main .home button:hover {
+    transform: scale(1.05);
+    background-color: #36363666;
+}
+main .home button:active {
+    transform: scale(0.9);
+    background-color: #28282866;
+}
+
+main .home img {
+    width: 80%;
+    transform: scale(0.95);
+    transition: 0.5s;
+}
+main .home button:hover img {
+    transform: scale(1);
+}
+main .home button:active img {
+    transform: scale(0.8);
+}
+
+
+/* _____________________________ */
 main .timer {
     border-radius: 100rem;
     padding: 1.5rem;
@@ -164,26 +218,6 @@ main .timer-buttons button:active {
     transition: 0.2s;
     background-color: #36363666;
 }
-
-/* _____________________________ */
-  #chatling-inline-bot {
-    width: 100%;
-    max-width: 900px; /* Set a max width */
-    height: 600px;    /* Customize the height */
-    margin: 0 auto;
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden;
-  }
-
-  #chatling-chat-iframe {
-    border-radius: 25px; /* Apply same border-radius to iframe */
-    height: 100%;
-    width: 100%;
-    border: none;
-    transform: scale(1); /* Adjust the scale as needed */
-    display: block;
-  }
-
 
 /* _____________________________ */
 .calender {
@@ -240,18 +274,18 @@ main .timer-buttons button:active {
 .calendar-day:hover {
     background-color: #bbb;
     color: #fff;
+    transform: scale(1.05);
 }
 .calendar-day:active {
     background-color: #888;
     color: #fff;
+    transform: scale(0.95);
 }
 
-.calendar-uday {
-    padding: 10px;
-    margin: 2px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    color: #bbb;
+.today {
+    background-color: #949494;
+    color: white;
+    transform: scale(1.075);
 }
 
 .dates {
@@ -359,12 +393,27 @@ main .timer-buttons button:active {
     background-color: #65536e55;
     cursor: pointer;
     transition: 0.3s;
+    position: relative;
 }
 #task-list li:hover {
     background-color: #8282827a;
 }
 #task-list li:active{
     background-color:#28282866;
+}
+.delete-btn {
+    padding: 0.2rem;
+    font-size: 1rem;
+    position: absolute;
+    right: 5px;
+    background-color: #9b00008c;
+}
+.delete-btn {
+    background-color: #9b0000bb;
+}
+.delete-btn {
+    transition: 0.2s;
+    background-color: #9b000066;
 }
 
 input[type="checkbox"] {
@@ -415,7 +464,7 @@ input[type="checkbox"]:checked {
     font-size: 1rem;
     cursor: pointer;
     margin: 0 0.5rem;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 #pomodoro-timer button:hover {
@@ -428,4 +477,13 @@ input[type="checkbox"]:checked {
 #timer-display {
     font-size: 2rem;
     margin-top: 1rem;
+}
+
+/* _____________________________ */
+#feedback-content button {
+    margin-top: 1rem;
+}
+#feedback-content button a {
+    color: #eee;
+    font-size: 1.75rem;
 }

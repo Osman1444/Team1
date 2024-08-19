@@ -58,3 +58,58 @@ function addEventToCalendar(taskName, date) {
       console.log('Event created: ' + event.htmlLink);
     });
 }
+
+
+const calendarDaysDiv = document.getElementById('calendarDays');
+const monthYearText = document.getElementById('monthYear');
+
+const currentDate = new Date();
+const currentDay = currentDate.getDate();
+const currentMonth = currentDate.getMonth(); // 0-based index
+const currentYear = currentDate.getFullYear();
+
+// Array of month names
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+// Set month and year header
+monthYearText.innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+// Function to get the number of days in a month
+function daysInMonth(month, year) {
+    return new Date(year, month + 1, 0).getDate();
+}
+
+// Get the first day of the month (Sunday = 0, Monday = 1, ...)
+const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+// Fill in the days before the 1st of the current month
+for (let i = 0; i < firstDayOfMonth; i++) {
+    const emptyDiv = document.createElement('div');
+    emptyDiv.classList.add('calendar-uday');
+    calendarDaysDiv.appendChild(emptyDiv);
+}
+
+// Populate the days of the month
+const totalDays = daysInMonth(currentMonth, currentYear);
+for (let day = 1; day <= totalDays; day++) {
+    const dayDiv = document.createElement('div');
+    dayDiv.classList.add('calendar-day');
+    dayDiv.innerText = day;
+
+    // Highlight today's date
+    if (day === currentDay) {
+        dayDiv.classList.add('today');
+    }
+
+    // Add an onclick handler if needed
+    dayDiv.onclick = function() {
+        adddate(day.toString().padStart(2, '0'));
+    };
+
+    calendarDaysDiv.appendChild(dayDiv);
+}
+
+// Function to handle date click (can be customized)
+// function adddate(date) {
+//     alert(`You selected ${date} ${monthNames[currentMonth]} ${currentYear}`);
+// }
