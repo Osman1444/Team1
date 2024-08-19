@@ -146,7 +146,7 @@ main .home {
 
 main .home button {
     padding: 1rem 2rem;
-    font-size: 2rem;
+    font-size: 1.75rem;
     width: 25%;
     background-color: #59595966;
     border: 0;
@@ -157,10 +157,12 @@ main .home button {
 main .home button:hover {
     transform: scale(1.05);
     background-color: #36363666;
+    font-size: 2rem;
 }
 main .home button:active {
     transform: scale(0.9);
     background-color: #28282866;
+    font-size: 1.5rem;
 }
 
 main .home img {
