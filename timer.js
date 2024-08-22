@@ -37,6 +37,7 @@ function startTimer() {
     toggleButtons();
     const minput = document.getElementById('work-mtimer');
     const sinput = document.getElementById('work-stimer');
+    const timer = document.getElementById('timer');
     if (minput.value == '') {
         minput.value = 0
     }
@@ -44,6 +45,7 @@ function startTimer() {
         sinput.value = 0
     }
     let time = (parseInt(minput.value) * 60) + parseInt(sinput.value); // Convert minutes to seconds
+    const ftime = time
 
     clearInterval(timerInterval);
 
@@ -55,6 +57,7 @@ function startTimer() {
             // alert("Time's up!");
             minput.value = '';
             sinput.value = '';
+            timer.style.boxShadow = `inset 0 0 0 0rem #99999933`;
             alrt();
             toggleButtons();
         } else {
@@ -65,6 +68,7 @@ function startTimer() {
             const seconds = time % 60;
             minput.value = `${minutes < 10 ? '0' : ''}${minutes}`;
             sinput.value = `${seconds < 10 ? '0' : ''}${seconds}`;
+            timer.style.boxShadow = `inset 0 0 1rem ${(1 - (time / ftime)) * 9}rem #99999933`;
         }
     }, 1000);
 }
@@ -77,6 +81,7 @@ function stopTimer() {
     sinput.style.pointerEvents = 'all';
     minput.value = ''; // Clear the input value
     sinput.value = ''; // Clear the input value
+    timer.style.boxShadow = `inset 0 0 0 0rem #99999933`;
     toggleButtons();
 }
 

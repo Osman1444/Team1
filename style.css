@@ -9,8 +9,26 @@ body {
     padding: 0;
     font-family: "MuseoModerno", sans-serif;
     color: #fff;
-    animation: moveBackground 30s ease infinite;
-    /* overflow: hidden; */
+    /* animation: moveBackground 30s ease infinite; */
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar{
+    width: 0;
+}
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes moveBackground {
@@ -31,9 +49,17 @@ body {
     45% { transform: scale(0.95) translateX(-10px); }
     50% { transform: scale(1) translateX(0px); }
 }
+@keyframes shakeo {
+    15% { transform: scale(1)}
+    40% { transform: scale(0.95)}
+    85% { transform: scale(1)}
+}
 
 .shake {
     animation: shake 1.5s ease-in-out infinite;
+}
+.shakeo {
+    animation: shakeo 0.5s ease-in-out;
 }
 .hover-effect {
     background-color: lightblue;
@@ -61,6 +87,20 @@ nav {
     padding: 0 2.5%;
 }
 
+nav h1 {
+    cursor: pointer;
+    transition: 0.3s ease;
+    user-select: none;
+}
+nav h1:hover {
+    word-spacing: 0.5rem;
+    letter-spacing: 0.3rem;
+}
+nav h1:active {
+    word-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
+}
+
 nav .links {
     display: flex;
     justify-content: space-around;
@@ -83,9 +123,11 @@ nav .links a:active {
 
 main {
     transform: scale(0);
+    opacity: 0;
 }
 #home-content {
     transform: scale(1);
+    opacity: 1;
 }
 
 main {
@@ -101,9 +143,8 @@ main {
     flex-direction: column;
     align-items: center;
     opacity: 1;
-    transition: opacity 0.5s;
     backdrop-filter: blur(7.5px);
-    transition: transform 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
 main h1 {
@@ -145,23 +186,18 @@ main .home {
 }
 
 main .home button {
-    padding: 1rem 2rem;
     font-size: 1.75rem;
     width: 25%;
-    background-color: #59595966;
-    border: 0;
     border-radius: 35px;
-    color: #fff;
-    transition: 0.3s ease;
 }
 main .home button:hover {
     transform: scale(1.05);
-    background-color: #36363666;
+    /* background-color: #36363666; */
     font-size: 2rem;
 }
 main .home button:active {
     transform: scale(0.9);
-    background-color: #28282866;
+    /* background-color: #28282866; */
     font-size: 1.5rem;
 }
 
@@ -189,6 +225,9 @@ main .timer {
     border: 0;
     display: flex;
     align-items: center;
+    transition: 1s;
+    position: relative;
+    box-shadow: inset 0 0 0 0rem #99999933;
 }
 main .timer input{
     width: 50%;
@@ -203,22 +242,11 @@ main .timer input{
 
 main .timer-buttons button {
     margin-top: 2rem;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 2rem;
-    background-color: #5e5e5e66;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
 }
 
-main .timer-buttons button:hover {
-    background-color: #5e5e5ebb;
-}
-main .timer-buttons button:active {
-    transition: 0.2s;
-    background-color: #36363666;
+main #TP-switch {
+    position: absolute;
+    right: 10px; bottom: 10px;
 }
 
 /* _____________________________ */
@@ -300,14 +328,15 @@ main .timer-buttons button:active {
     position: absolute;
     right: 10px; bottom: 10px;
     padding: 1rem;
-    border: none;
     border-radius: 100px;
-    background-color: #4646467a;
-    color: white;
     font-size: 3rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
     width: 5rem; height: 5rem;
+}
+
+#date-list {
+    height: 70%;
+    overflow-y: scroll;
+    position: relative;
 }
 
 #date-list li {
@@ -334,15 +363,20 @@ main .timer-buttons button:active {
     border: none;
     color: #fff;
     font-size: 1.5rem;
+    transition: 0.5s;
 }
+.dayselect:hover {
+    color: #ccc;
+}
+.dayselect:active {
+    color: #999;
+}
+
 #date-list a {
     text-decoration: none;
     margin-left: 1rem;
     color: #999;
 }
-/* .dayselect option{
-    color: #000;
-} */
 
 /* _____________________________ */
 .tasksection {
@@ -367,12 +401,10 @@ main .timer-buttons button:active {
 
 #add-task-btn {
     position: absolute;
-    right: 10px; bottom: 10px;
+    right: 3.5px; bottom: -10px;
     padding: 1rem;
     border: none;
     border-radius: 100px;
-    background-color: #4646467a;
-    color: white;
     font-size: 3rem;
     cursor: pointer;
     margin-bottom: 1rem;
@@ -382,11 +414,37 @@ main .timer-buttons button:active {
 #task-list {
     list-style-type: none;
     padding: 0;
-    width: 100%;
+    width: 100%; height: 75%;
     margin-bottom: 2rem;
+    overflow-y: scroll;
 }
-
-#task-list li {
+#task-list .taskprompt {
+    position: fixed;
+    left: 30vw; top: 32.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw; height: 35vh;
+    background-color: #4646467a;
+    border-radius: 35px;
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    transition: 0.3s;
+}
+#task-list .taskprompt input {
+    width: 80%; height: 30%;
+    background-color: #00000015;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    transition: 0.3s;
+    outline: none;
+}
+#task-list .taskprompt button {
+    margin: 0.5rem 0;
+    transition: 0.3s;
+}
+#task-list .task {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
@@ -396,24 +454,26 @@ main .timer-buttons button:active {
     cursor: pointer;
     transition: 0.3s;
     position: relative;
+    left: 0; top: 0;
 }
-#task-list li:hover {
+#task-list .task:hover {
     background-color: #8282827a;
 }
-#task-list li:active{
+#task-list .task{
     background-color:#28282866;
 }
-.delete-btn {
+.task .delete-btn {
     padding: 0.2rem;
     font-size: 1rem;
     position: absolute;
     right: 5px;
     background-color: #9b00008c;
+    transition: 0.3s;
 }
-.delete-btn {
+.task .delete-btn:hover {
     background-color: #9b0000bb;
 }
-.delete-btn {
+.task .delete-btn:active {
     transition: 0.2s;
     background-color: #9b000066;
 }

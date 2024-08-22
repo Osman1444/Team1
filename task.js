@@ -20,7 +20,8 @@ function startPomodoro() {
     starttimer(workTime); // Start the work timer
 }
 
-// Function to start the timer
+
+// Function to update the timer display
 function starttimer(time) {
     pomodoroTime = time;
     pomodoroInterval = setInterval(() => {
@@ -74,41 +75,71 @@ function updatePhaseMessage(message, color) {
 
 // Function to prompt user for task name and add it to the list
 function addTaskPrompt() {
-    const taskInput = prompt('Enter the task name:');
-    if (taskInput) {
-        addTask(taskInput);
+    const taskprompt = `
+        <h2>Add Task</h2>
+        <button class="delete-btn" onclick="deleteTask(this.parentElement)">Delete</button>
+    `;
+    if (!document.body.innerHTML.includes(taskprompt)) {
+    const taskList = document.getElementById('task-list');
+    const li = document.createElement('li');
+    const addbtn = document.createElement('button');
+    const taskinput = document.createElement('input');
+
+    li.innerHTML = taskprompt;
+    li.className = `taskprompt fade-in`; // Add fade-in class
+    taskinput.className = `task-name`;
+    taskinput.placeholder = `Enter the task name...`;
+
+    addbtn.innerText = 'Add';
+    addbtn.addEventListener('click', function() {
+        addTask(taskinput.value, li, addbtn);
+
+        // Apply shake animation to the website when the "Add" button is clicked
+        document.body.classList.add('shakeo');
+        setTimeout(() => {
+            document.body.classList.remove('shakeo');
+        }, 500); // Duration should match the CSS animation duration
+    });
+
+    li.appendChild(taskinput);
+    li.appendChild(addbtn);
+    taskList.appendChild(li);
+
+    // Automatically focus on the input field when it appears
+    taskinput.focus();
     }
 }
 
+
 // Function to add a new task to the task list
-function addTask(taskName) {
-    const taskList = document.getElementById('task-list');
-    const li = document.createElement('li');
-    
-    // Create task item with a delete button
-    li.innerHTML = `
-        <input type="checkbox" class="task-checkbox">
-        <span class="task-name">${taskName}</span>
-        <button class="delete-btn">Delete</button>
-    `;
-    
-    // Add event listener for delete button
-    li.querySelector('.delete-btn').onclick = function() {
-        deleteTask(li);
-    };
+function addTask(taskName, li, addbtn) {
+    if (taskName || li.value) {
+        li.className = `task`;
+        li.removeChild(addbtn);
+        li.removeChild(li.querySelector('h2'));
 
-    li.onclick = function() {
-        selectTask(taskName);
-    };
+        li.innerHTML = `<input type="checkbox" class="task-checkbox"> ${taskName}
+            <button class="delete-btn" onclick="deleteTask(this.parentElement)">Delete</button>`;
+        
+        // Save tasks to cookies after adding
+        saveTasksToCookies();
 
-    taskList.appendChild(li);
-    saveTasksToCookies(); // Save tasks to cookies after adding
+        li.onclick = function() {
+            selectTask(taskName);
+        };
+    } else {
+        alert('Please, enter a task name');
+    }
 }
 
 // Function to delete a task from the task list
 function deleteTask(taskElement) {
     const taskList = document.getElementById('task-list');
-    taskList.removeChild(taskElement);
+    taskElement.style.transform = 'scale(0)';
+    taskElement.style.opacity = '0';
+    setTimeout(() => {
+        taskList.removeChild(taskElement);
+    }, 100)
     saveTasksToCookies(); // Save tasks to cookies after deleting
 }
 
@@ -125,7 +156,7 @@ function saveTasksToCookies() {
     const taskItems = taskList.getElementsByTagName('li');
     
     for (let i = 0; i < taskItems.length; i++) {
-        const taskName = taskItems[i].getElementsByClassName('task-name')[0].textContent;
+        const taskName = taskItems[i].querySelector('input[type="checkbox"]').nextSibling.textContent.trim();
         tasks.push(taskName);
     }
     
@@ -134,22 +165,52 @@ function saveTasksToCookies() {
 }
 
 // Function to load tasks from cookies
+// Function to load tasks from cookies
 function loadTasksFromCookies() {
     const cookieName = 'tasks=';
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookies = decodedCookie.split(';');
     
     for (let i = 0; i < cookies.length; i++) {
-        let c = cookies[i];
-        while (c.charAt(0) === ' ') c = c.substring(1);
+        let c = cookies[i].trim();
         if (c.indexOf(cookieName) === 0) {
             const tasksString = c.substring(cookieName.length, c.length);
             const tasks = JSON.parse(tasksString);
-            tasks.forEach(taskName => addTask(taskName)); // Add each task to the list
+            tasks.forEach(taskName => {
+                addTaskFromCookie(taskName); // Add each task to the list from the cookie
+            });
             return;
         }
     }
 }
+
+// Function to add a task from the cookie
+function addTaskFromCookie(taskName) {
+    const taskList = document.getElementById('task-list');
+    const li = document.createElement('li');
+    
+    li.className = `task fade-in`; // Add fade-in class for animation
+    li.innerHTML = `<input type="checkbox" class="task-checkbox"> ${taskName}
+        <button class="delete-btn" onclick="deleteTask(this.parentElement)">Delete</button>`;
+    
+    li.onclick = function() {
+        selectTask(taskName);
+    };
+
+    taskList.appendChild(li);
+}
+
+// Call loadTasksFromCookies when the page loads
+window.onload = function() {
+    loadTasksFromCookies();
+};
+
+
+// Call loadTasksFromCookies when the page loads
+window.onload = function() {
+    loadTasksFromCookies();
+};
+
 
 // Call loadTasksFromCookies when the page loads
 window.onload = function() {
